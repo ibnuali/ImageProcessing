@@ -54,7 +54,8 @@ namespace OpenCV {
 	private: System::Windows::Forms::TrackBar^  elementTrackbar;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::TrackBar^  kernelTrackbar;
+	private: System::Windows::Forms::TrackBar^  sizeTrackbar;
+
 	private: System::Windows::Forms::PictureBox^  ptb_process;
 	private: System::Windows::Forms::RadioButton^  radioDilate;
 	private: System::Windows::Forms::RadioButton^  radioErosi;
@@ -66,6 +67,19 @@ namespace OpenCV {
 
 
 	private: System::Windows::Forms::Label^  kernelLabel;
+
+	private: System::Windows::Forms::RadioButton^  radioBlur;
+	private: System::Windows::Forms::RadioButton^  gaussianRadio;
+	private: System::Windows::Forms::RadioButton^  radioSobel;
+	private: System::Windows::Forms::RadioButton^  radioCanny;
+	private: System::Windows::Forms::RadioButton^  radioLaplas;
+	private: System::Windows::Forms::RadioButton^  radioScahrr;
+
+
+
+
+
+
 
 
 	protected:
@@ -92,7 +106,7 @@ namespace OpenCV {
 			this->elementTrackbar = (gcnew System::Windows::Forms::TrackBar());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->kernelTrackbar = (gcnew System::Windows::Forms::TrackBar());
+			this->sizeTrackbar = (gcnew System::Windows::Forms::TrackBar());
 			this->ptb_process = (gcnew System::Windows::Forms::PictureBox());
 			this->radioDilate = (gcnew System::Windows::Forms::RadioButton());
 			this->radioErosi = (gcnew System::Windows::Forms::RadioButton());
@@ -102,10 +116,16 @@ namespace OpenCV {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->ElementLabel = (gcnew System::Windows::Forms::Label());
 			this->kernelLabel = (gcnew System::Windows::Forms::Label());
+			this->radioBlur = (gcnew System::Windows::Forms::RadioButton());
+			this->gaussianRadio = (gcnew System::Windows::Forms::RadioButton());
+			this->radioSobel = (gcnew System::Windows::Forms::RadioButton());
+			this->radioCanny = (gcnew System::Windows::Forms::RadioButton());
+			this->radioLaplas = (gcnew System::Windows::Forms::RadioButton());
+			this->radioScahrr = (gcnew System::Windows::Forms::RadioButton());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ptbSrc))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->elementTrackbar))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->kernelTrackbar))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sizeTrackbar))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ptb_process))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -118,7 +138,7 @@ namespace OpenCV {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(569, 24);
+			this->menuStrip1->Size = System::Drawing::Size(650, 24);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -177,9 +197,9 @@ namespace OpenCV {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(5, 253);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(60, 13);
+			this->label1->Size = System::Drawing::Size(44, 13);
 			this->label1->TabIndex = 21;
-			this->label1->Text = L"Kernel Size";
+			this->label1->Text = L"Size SE";
 			// 
 			// label2
 			// 
@@ -190,14 +210,14 @@ namespace OpenCV {
 			this->label2->TabIndex = 22;
 			this->label2->Text = L"Element Size";
 			// 
-			// kernelTrackbar
+			// sizeTrackbar
 			// 
-			this->kernelTrackbar->Location = System::Drawing::Point(1, 269);
-			this->kernelTrackbar->Maximum = 20;
-			this->kernelTrackbar->Name = L"kernelTrackbar";
-			this->kernelTrackbar->Size = System::Drawing::Size(132, 45);
-			this->kernelTrackbar->TabIndex = 23;
-			this->kernelTrackbar->Scroll += gcnew System::EventHandler(this, &MyForm::kernelTrackbar_Scroll);
+			this->sizeTrackbar->Location = System::Drawing::Point(1, 269);
+			this->sizeTrackbar->Maximum = 20;
+			this->sizeTrackbar->Name = L"sizeTrackbar";
+			this->sizeTrackbar->Size = System::Drawing::Size(132, 45);
+			this->sizeTrackbar->TabIndex = 23;
+			this->sizeTrackbar->Scroll += gcnew System::EventHandler(this, &MyForm::sizeTrackbar_Scroll);
 			// 
 			// ptb_process
 			// 
@@ -230,12 +250,10 @@ namespace OpenCV {
 			// radioButton1
 			// 
 			this->radioButton1->AutoSize = true;
-			this->radioButton1->Checked = true;
 			this->radioButton1->Location = System::Drawing::Point(6, 19);
 			this->radioButton1->Name = L"radioButton1";
 			this->radioButton1->Size = System::Drawing::Size(58, 17);
 			this->radioButton1->TabIndex = 27;
-			this->radioButton1->TabStop = true;
 			this->radioButton1->Text = L"Normal";
 			this->radioButton1->UseVisualStyleBackColor = true;
 			// 
@@ -246,7 +264,6 @@ namespace OpenCV {
 			this->openingRadio->Name = L"openingRadio";
 			this->openingRadio->Size = System::Drawing::Size(65, 17);
 			this->openingRadio->TabIndex = 28;
-			this->openingRadio->TabStop = true;
 			this->openingRadio->Text = L"Opening";
 			this->openingRadio->UseVisualStyleBackColor = true;
 			// 
@@ -257,7 +274,6 @@ namespace OpenCV {
 			this->closingRadio->Name = L"closingRadio";
 			this->closingRadio->Size = System::Drawing::Size(59, 17);
 			this->closingRadio->TabIndex = 29;
-			this->closingRadio->TabStop = true;
 			this->closingRadio->Text = L"Closing";
 			this->closingRadio->UseVisualStyleBackColor = true;
 			// 
@@ -268,7 +284,7 @@ namespace OpenCV {
 			this->groupBox1->Controls->Add(this->radioErosi);
 			this->groupBox1->Controls->Add(this->openingRadio);
 			this->groupBox1->Controls->Add(this->radioDilate);
-			this->groupBox1->Location = System::Drawing::Point(139, 255);
+			this->groupBox1->Location = System::Drawing::Point(145, 255);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(159, 92);
 			this->groupBox1->TabIndex = 30;
@@ -293,18 +309,90 @@ namespace OpenCV {
 			this->kernelLabel->TabIndex = 32;
 			this->kernelLabel->Text = L"0";
 			// 
+			// radioBlur
+			// 
+			this->radioBlur->AutoSize = true;
+			this->radioBlur->Location = System::Drawing::Point(334, 278);
+			this->radioBlur->Name = L"radioBlur";
+			this->radioBlur->Size = System::Drawing::Size(43, 17);
+			this->radioBlur->TabIndex = 34;
+			this->radioBlur->TabStop = true;
+			this->radioBlur->Text = L"Blur";
+			this->radioBlur->UseVisualStyleBackColor = true;
+			// 
+			// gaussianRadio
+			// 
+			this->gaussianRadio->AutoSize = true;
+			this->gaussianRadio->Location = System::Drawing::Point(334, 301);
+			this->gaussianRadio->Name = L"gaussianRadio";
+			this->gaussianRadio->Size = System::Drawing::Size(90, 17);
+			this->gaussianRadio->TabIndex = 35;
+			this->gaussianRadio->TabStop = true;
+			this->gaussianRadio->Text = L"Gaussian Blur";
+			this->gaussianRadio->UseVisualStyleBackColor = true;
+			// 
+			// radioSobel
+			// 
+			this->radioSobel->AutoSize = true;
+			this->radioSobel->Location = System::Drawing::Point(334, 255);
+			this->radioSobel->Name = L"radioSobel";
+			this->radioSobel->Size = System::Drawing::Size(52, 17);
+			this->radioSobel->TabIndex = 36;
+			this->radioSobel->TabStop = true;
+			this->radioSobel->Text = L"Sobel";
+			this->radioSobel->UseVisualStyleBackColor = true;
+			// 
+			// radioCanny
+			// 
+			this->radioCanny->AutoSize = true;
+			this->radioCanny->Location = System::Drawing::Point(439, 255);
+			this->radioCanny->Name = L"radioCanny";
+			this->radioCanny->Size = System::Drawing::Size(55, 17);
+			this->radioCanny->TabIndex = 37;
+			this->radioCanny->TabStop = true;
+			this->radioCanny->Text = L"Canny";
+			this->radioCanny->UseVisualStyleBackColor = true;
+			// 
+			// radioLaplas
+			// 
+			this->radioLaplas->AutoSize = true;
+			this->radioLaplas->Location = System::Drawing::Point(437, 279);
+			this->radioLaplas->Name = L"radioLaplas";
+			this->radioLaplas->Size = System::Drawing::Size(71, 17);
+			this->radioLaplas->TabIndex = 38;
+			this->radioLaplas->TabStop = true;
+			this->radioLaplas->Text = L"Laplacian";
+			this->radioLaplas->UseVisualStyleBackColor = true;
+			// 
+			// radioScahrr
+			// 
+			this->radioScahrr->AutoSize = true;
+			this->radioScahrr->Location = System::Drawing::Point(437, 301);
+			this->radioScahrr->Name = L"radioScahrr";
+			this->radioScahrr->Size = System::Drawing::Size(56, 17);
+			this->radioScahrr->TabIndex = 39;
+			this->radioScahrr->TabStop = true;
+			this->radioScahrr->Text = L"Scharr";
+			this->radioScahrr->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(569, 353);
+			this->ClientSize = System::Drawing::Size(650, 350);
+			this->Controls->Add(this->radioScahrr);
+			this->Controls->Add(this->radioLaplas);
+			this->Controls->Add(this->radioCanny);
+			this->Controls->Add(this->radioSobel);
+			this->Controls->Add(this->gaussianRadio);
+			this->Controls->Add(this->radioBlur);
 			this->Controls->Add(this->kernelLabel);
 			this->Controls->Add(this->ElementLabel);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->ptbSrc);
 			this->Controls->Add(this->ptb_process);
-			this->Controls->Add(this->kernelTrackbar);
+			this->Controls->Add(this->sizeTrackbar);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->elementTrackbar);
 			this->Controls->Add(this->menuStrip1);
@@ -316,7 +404,7 @@ namespace OpenCV {
 			this->menuStrip1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ptbSrc))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->elementTrackbar))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->kernelTrackbar))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->sizeTrackbar))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ptb_process))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -339,14 +427,18 @@ private: System::Void openToolStripMenuItem_Click(System::Object^  sender, Syste
 		}
 
 		src = toResize(imread(ConvertString2Char(openFileDialog1->FileName))); // resize image
-		Mat imgSrc,erosionImg, dilateImg,openingImg,closingImg;
+		Mat imgSrc, erosionImg, dilateImg, openingImg, closingImg, blurImg,sobelImg,cannyImg,gaussianBlurImg,scharrImg;
 	
 		erosionImg = src;
 		dilateImg = src;
 		openingImg = src;
 		closingImg = src;
+		blurImg = src;
+		sobelImg = src;
 		imgSrc = src;
-
+		cannyImg = src;
+		scharrImg = src;
+		gaussianBlurImg = src;
 		if (radioDilate->Checked) {
 			DrawCVImage(ptb_process, dilateImg);
 			DrawCVImage(ptbSrc, imgSrc);
@@ -363,6 +455,30 @@ private: System::Void openToolStripMenuItem_Click(System::Object^  sender, Syste
 			DrawCVImage(ptb_process, closingImg);
 			DrawCVImage(ptbSrc, imgSrc);
 		}
+		else if (radioSobel->Checked) {
+			DrawCVImage(ptb_process, sobelImg);
+			DrawCVImage(ptbSrc, imgSrc);
+		}
+		else if (radioBlur->Checked) {
+			DrawCVImage(ptb_process, blurImg);
+			DrawCVImage(ptbSrc, imgSrc);
+		}
+		else if (radioLaplas->Checked) {
+			DrawCVImage(ptb_process, blurImg);
+			DrawCVImage(ptbSrc, imgSrc);
+		}
+		else if (gaussianRadio->Checked) {
+			DrawCVImage(ptb_process, gaussianBlurImg);
+			DrawCVImage(ptbSrc, imgSrc);
+		}
+		else if (radioCanny->Checked) {
+			DrawCVImage(ptb_process, cannyImg);
+			DrawCVImage(ptbSrc, imgSrc);
+		}
+		else if (radioScahrr->Checked) {
+			DrawCVImage(ptb_process, scharrImg);
+			DrawCVImage(ptbSrc, imgSrc);
+		}
 		else {
 			DrawCVImage(ptbSrc, imgSrc);
 			DrawCVImage(ptb_process, imgSrc);
@@ -375,12 +491,12 @@ private: char* ConvertString2Char(System::String^ str) {
 }
 
 private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
-
 }
+
 private: cv::Mat toErotion(Mat src) {
 
 	int erosion_elem = elementTrackbar->Value;
-	int erosion_size = kernelTrackbar->Value;
+	int erosion_size = sizeTrackbar->Value;
 	int erosion_type;
 
 	if (erosion_elem == 0) { erosion_type = MORPH_RECT; }
@@ -399,7 +515,7 @@ private: cv::Mat toDilate(Mat src) {
 	
 	elementTrackbar->Maximum = 2;
 	int dilation_elem = elementTrackbar->Value;
-	int dilation_size = kernelTrackbar->Value;
+	int dilation_size = sizeTrackbar->Value;
 	int dilation_type;
 	
 	if (dilation_elem == 0) { dilation_type = MORPH_RECT; }
@@ -418,7 +534,7 @@ private: cv::Mat toDilate(Mat src) {
 private: cv::Mat toOpening(Mat src) {
 
 	int element_size = elementTrackbar->Value;
-	int closing_size = kernelTrackbar->Value;
+	int closing_size = sizeTrackbar->Value;
 	int type;
 
 	if (element_size == 0) { type = MORPH_RECT; }
@@ -434,9 +550,45 @@ private: cv::Mat toOpening(Mat src) {
 	return dst;
 }
 
+private: cv::Mat toBlurFilter(Mat src) {
+	blur(src, dst, cv::Size(sizeTrackbar->Value, sizeTrackbar->Value));
+	return dst;
+}
+
+private: cv::Mat toGaussianBlur(Mat src) {
+	GaussianBlur(src, dst, cv::Size(sizeTrackbar->Value, sizeTrackbar->Value), 0,0);
+	return dst;
+}
+private: cv::Mat toSobel(Mat src) {
+	Mat sobelDst;
+	Sobel(src, dst, CV_16S, sizeTrackbar->Value, 1);
+	convertScaleAbs(dst, sobelDst);
+	return sobelDst;
+}
+private: cv::Mat LaplasFilter(Mat src) {
+	Mat laplasDst;
+	Laplacian(src, dst, CV_16S, sizeTrackbar->Value,1,0);
+	convertScaleAbs(dst, laplasDst);
+	return laplasDst;
+}
+
+private: cv::Mat toScharr(Mat src) {
+	Scharr(src, dst, CV_SCHARR,0,1);
+
+	return dst;
+}
+private: cv::Mat CannyFilter(Mat src) {
+	Mat dst1, dst2;
+	cvtColor(src, dst, CV_BGR2GRAY);
+	GaussianBlur(dst, dst, cv::Size(sizeTrackbar->Value, sizeTrackbar->Value), 2);
+	double t1 = 30, t2 = 200;
+	Canny(dst, dst1, t1, t2, 3, false);
+	convertScaleAbs(dst1, dst2);
+	return dst2;
+}
 private: cv::Mat toClosing(Mat src) {
 	int element_size = elementTrackbar->Value;
-	int closing_size = kernelTrackbar->Value;
+	int closing_size = sizeTrackbar->Value;
 	int type;
 
 	if (element_size == 0) { type = MORPH_RECT; }
@@ -508,25 +660,51 @@ private: System::Void elementTrackbar_Scroll(System::Object^  sender, System::Ev
 		ElementLabel->Text = elementTrackbar->Value.ToString();
 	}
 }
-private: System::Void kernelTrackbar_Scroll(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void sizeTrackbar_Scroll(System::Object^  sender, System::EventArgs^  e) {
+	sizeTrackbar->Maximum = 20;
 	if (radioErosi->Checked) {
 		DrawCVImage(ptb_process, toErotion(src));
-		kernelLabel->Text = kernelTrackbar->Value.ToString();
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
 	}
 	else if (radioDilate->Checked) {
 		DrawCVImage(ptb_process, toDilate(src));
-		kernelLabel->Text = kernelTrackbar->Value.ToString();
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
 	}
 	else if (openingRadio->Checked) {
 		DrawCVImage(ptb_process, toOpening(src));
-		kernelLabel->Text = kernelTrackbar->Value.ToString();
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
 	}
 	else if (closingRadio->Checked) {
 		DrawCVImage(ptb_process, toClosing(src));
-		kernelLabel->Text = kernelTrackbar->Value.ToString();
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
+	}
+	else if (radioBlur->Checked && sizeTrackbar->Value != 0) {
+		DrawCVImage(ptb_process, toBlurFilter(src));
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
+	}
+	else if (radioSobel->Checked) {
+		sizeTrackbar->Maximum = 2;
+		DrawCVImage(ptb_process, toSobel(src));
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
+	}
+	else if (radioCanny->Checked && sizeTrackbar->Value%2 ==1) {
+		DrawCVImage(ptb_process, CannyFilter(src));
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
+	}
+	else if (gaussianRadio->Checked && sizeTrackbar->Value % 2 == 1) {
+		DrawCVImage(ptb_process, toGaussianBlur(src));
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
+	}
+	else if (radioLaplas->Checked &&  sizeTrackbar->Value % 2 == 1) {
+		DrawCVImage(ptb_process, LaplasFilter(src));
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
+	}
+	else if (radioScahrr->Checked) {
+		DrawCVImage(ptb_process, toScharr(src));
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
 	}
 	else {
-		kernelLabel->Text = kernelTrackbar->Value.ToString();
+		kernelLabel->Text = sizeTrackbar->Value.ToString();
 	}
 }
 };

@@ -1,7 +1,7 @@
 ﻿  MyForm.cpp
-c:\users\ibnu ali\documents\visual studio 2015\projects\appopencv\opencv\MyForm.h(470): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\ibnu ali\documents\visual studio 2015\projects\appopencv\opencv\MyForm.h(474): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\ibnu ali\documents\visual studio 2015\projects\appopencv\opencv\MyForm.h(478): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\ibnu ali\documents\imageprocessing\opencv\MyForm.h(622): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\ibnu ali\documents\imageprocessing\opencv\MyForm.h(626): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\ibnu ali\documents\imageprocessing\opencv\MyForm.h(630): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 MyForm.cpp(8): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
 e:\software\windows\programming\opencv\build\include\opencv2\core\cvstd.hpp(596): warning C4793: 'cv::String::String': function compiled as native:
   	Found an intrinsic not supported in managed code
@@ -20,5 +20,5 @@ e:\software\windows\programming\opencv\build\include\opencv2\core\ptr.inl.hpp(72
 e:\software\windows\programming\opencv\build\include\opencv2\core\mat.inl.hpp(601): warning C4793: 'cv::Mat::operator=': function compiled as native:
   	Found an intrinsic not supported in managed code
   MyForm.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
-  OpenCV.vcxproj -> C:\Users\Ibnu Ali\Documents\Visual Studio 2015\Projects\appOpenCV\x64\Debug\OpenCV.exe
-  OpenCV.vcxproj -> C:\Users\Ibnu Ali\Documents\Visual Studio 2015\Projects\appOpenCV\x64\Debug\OpenCV.pdb (Partial PDB)
+  OpenCV.vcxproj -> C:\Users\Ibnu Ali\Documents\ImageProcessing\x64\Debug\OpenCV.exe
+  OpenCV.vcxproj -> C:\Users\Ibnu Ali\Documents\ImageProcessing\x64\Debug\OpenCV.pdb (Partial PDB)
